@@ -9,6 +9,9 @@ use CodelyTv\Mooc\Videos\Domain\VideoId;
 use CodelyTv\Mooc\Videos\Domain\VideoRepository;
 use CodelyTv\Mooc\Videos\Domain\Videos;
 use CodelyTv\Shared\Domain\Criteria\Criteria;
+use CodelyTv\Shared\Domain\Criteria\Filters;
+use CodelyTv\Shared\Domain\Criteria\Order;
+use CodelyTv\Shared\Domain\Criteria\OrderBy;
 use CodelyTv\Shared\Infrastructure\Persistence\Doctrine\DoctrineCriteriaConverter;
 use CodelyTv\Shared\Infrastructure\Persistence\Doctrine\DoctrineRepository;
 
@@ -38,5 +41,10 @@ final class VideoRepositoryMySql extends DoctrineRepository implements VideoRepo
         $videos           = $this->repository(Video::class)->matching($doctrineCriteria)->toArray();
 
         return new Videos($videos);
+    }
+
+    public function searchLastVideo(): ?Video
+    {
+        return $this->repository(Video::class)->findOneBy([], ['id' => 'DESC']);
     }
 }

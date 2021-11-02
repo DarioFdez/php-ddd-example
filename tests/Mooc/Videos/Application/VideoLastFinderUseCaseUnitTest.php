@@ -4,6 +4,7 @@ namespace CodelyTv\Tests\Mooc\Videos\Application;
 
 use CodelyTv\Mooc\Shared\Domain\Videos\VideoUrl;
 use CodelyTv\Mooc\Videos\Application\Find\VideoLastFinderUseCase;
+use CodelyTv\Mooc\Videos\Domain\NoVideoFound;
 use CodelyTv\Mooc\Videos\Domain\Video;
 use CodelyTv\Mooc\Videos\Domain\VideoId;
 use CodelyTv\Mooc\Videos\Domain\VideoRepository;
@@ -58,7 +59,7 @@ class VideoLastFinderUseCaseUnitTest extends TestCase
             ->expects(self::once())
             ->method('searchLastVideo')
             ->willReturn(null);
-        $result = $this->sut->execute();
-        $this->assertNull($result);
+        self::expectException(NoVideoFound::class);
+        $this->sut->execute();
     }
 }

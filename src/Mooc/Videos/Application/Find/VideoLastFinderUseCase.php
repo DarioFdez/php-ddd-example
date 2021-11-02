@@ -3,19 +3,20 @@
 namespace CodelyTv\Mooc\Videos\Application\Find;
 
 use CodelyTv\Mooc\Videos\Domain\Video;
+use CodelyTv\Mooc\Videos\Domain\VideoLastFinder;
 use CodelyTv\Mooc\Videos\Domain\VideoRepository;
 
 class VideoLastFinderUseCase
 {
-    private VideoRepository $repository;
+    private VideoLastFinder $finder;
 
     public function __construct(VideoRepository $repository)
     {
-        $this->repository = $repository;
+        $this->finder = new VideoLastFinder($repository);
     }
 
     public function execute(): ?Video
     {
-        return $this->repository->searchLastVideo();
+        return $this->finder->__invoke();
     }
 }

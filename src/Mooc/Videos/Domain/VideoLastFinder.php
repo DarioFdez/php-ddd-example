@@ -8,12 +8,12 @@ final class VideoLastFinder
     {
     }
 
-    public function __invoke(VideoId $id): Video
+    public function __invoke(): Video
     {
         $video = $this->repository->searchLastVideo();
 
         if (null === $video) {
-            throw new VideoNotFound($id);
+            throw new NoVideoFound();
         }
 
         return $video;

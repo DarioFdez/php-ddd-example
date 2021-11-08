@@ -42,6 +42,23 @@ final class Video extends AggregateRoot
         $this->title = $newTitle;
     }
 
+    public function updateUrl(VideoUrl $newUrl): void
+    {
+        $this->record(
+            new VideoUrlUpdatedDomainEvent(
+                $this->id()->value(),
+                $this->type()->value(),
+                $this->title()->value(),
+                $this->url()->value(),
+                $newUrl->value(),
+                $this->courseId()->value()
+            )
+        );
+
+        $this->url = $newUrl;
+
+    }
+
     public function id(): VideoId
     {
         return $this->id;

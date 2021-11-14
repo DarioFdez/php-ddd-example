@@ -15,11 +15,10 @@ composer-update: CMD=update
 
 # Usage example (add a new dependency): `make composer CMD="require --dev symfony/var-dumper ^4.2"`
 composer composer-install composer-update:
-	@docker run --rm --interactive --tty --volume $(current-dir):/app --user $(id -u):$(id -g) \
-		clevyr/prestissimo $(CMD) \
-			--ignore-platform-reqs \
-			--no-ansi \
-			--no-interaction
+	@docker run --rm $(INTERACTIVE) --volume $(current-dir):/app --user $(id -u):$(id -g) \
+    		composer:2 $(CMD) \
+    			--ignore-platform-reqs \
+    			--no-ansi
 
 # 🕵️ Clear cache
 # OpCache: Restarts the unique process running in the PHP FPM container

@@ -28,4 +28,9 @@ final class FileCourseRepository implements CourseRepository
     {
         return sprintf('%s.%s.repo', self::FILE_PATH, $id);
     }
+
+    public function searchBy(CourseId $id): ?Course
+    {
+        // TODO: Implement searchBy() method.
+    }
 }

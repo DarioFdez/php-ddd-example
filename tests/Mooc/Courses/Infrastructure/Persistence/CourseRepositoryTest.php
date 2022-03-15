@@ -33,4 +33,10 @@ final class CourseRepositoryTest extends CoursesModuleInfrastructureTestCase
     {
         $this->assertNull($this->repository()->search(CourseIdMother::create()));
     }
+
+    /** @test */
+    public function it_should_not_return_a_non_existing_course2(): void
+    {
+        $this->assertNull($this->repository()->search(CourseIdMother::create()));
+    }
 }
